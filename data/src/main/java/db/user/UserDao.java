@@ -12,8 +12,10 @@ public class UserDao {
     public UserDao() {
     }
 
-    public List<UserEntity> findUsersByName(String name) {
-        return null;
+    public List<UserEntity> findByName(String name) {
+        return SQLite.select().from(UserEntity.class)
+                .where(UserEntity_Table.name.like("%" + name + "%"))
+                .queryList();
     }
 
     public List<UserEntity> findAll() {

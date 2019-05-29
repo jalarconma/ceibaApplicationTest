@@ -47,6 +47,11 @@ public class UserCloudDataStore implements UserDataStore {
     }
 
     @Override
+    public List<UserS> getUsersByName(String name) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public List<UserS> createUsers(List<UserS> users) {
         throw new UnsupportedOperationException();
     }

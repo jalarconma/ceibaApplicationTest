@@ -1,12 +1,19 @@
 package co.com.ceiba.mobile.pruebadeingreso.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.business.models.UserS;
+import com.raizlabs.android.dbflow.StringUtils;
 
 import java.util.List;
 
@@ -29,10 +36,12 @@ public class MainActivity extends BaseActivity implements MainView, UserListener
     @Inject
     MainPresenter mPresenter;
 
-    @BindView(R.id.textInputLayoutSearch)
-    TextInputLayout textInputLayoutSearch;
+    @BindView(R.id.editTextSearch)
+    EditText editTextSearch;
     @BindView(R.id.recyclerViewSearchResults)
     RecyclerView recyclerViewSearchResults;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     UserAdapter mUserAdapter;
 
@@ -64,6 +73,8 @@ public class MainActivity extends BaseActivity implements MainView, UserListener
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this);
         recyclerViewSearchResults.setLayoutManager(layout);
         recyclerViewSearchResults.setAdapter(mUserAdapter);
+
+        editTextSearch.addTextChangedListener(new UserFindListener());
     }
 
     @Override
@@ -76,6 +87,11 @@ public class MainActivity extends BaseActivity implements MainView, UserListener
 
     @Override
     public void setUsers(List<UserS> response) {
+
+        if (response == null || response.isEmpty()) {
+            showToastMsg(R.string.list_is_empty);
+        }
+
         mUserAdapter.setData(response);
     }
 
@@ -85,7 +101,38 @@ public class MainActivity extends BaseActivity implements MainView, UserListener
     }
 
     @Override
+    public void showProgress(boolean status) {
+        progressBar.setVisibility( status ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public void onGetPosts(Integer userId) {
-        showToastMsg(R.string.generic_message_progress);
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra("userId", userId);
+        startActivity(intent);
+    }
+
+    private class UserFindListener implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String name = s.toString();
+
+            if (StringUtils.isNotNullOrEmpty(name)) {
+                mPresenter.onFilterUsers(name);
+            } else {
+                mPresenter.onCreate();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
     }
 }

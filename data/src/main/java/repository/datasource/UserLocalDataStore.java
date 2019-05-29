@@ -29,6 +29,12 @@ public class UserLocalDataStore implements UserDataStore {
     }
 
     @Override
+    public List<UserS> getUsersByName(String name) {
+        List<UserEntity> users = mUserDao.findByName(name);
+        return mUserMapper.entity2Model(users);
+    }
+
+    @Override
     public List<UserS> createUsers(List<UserS> users) {
 
         for (UserS user : users) {

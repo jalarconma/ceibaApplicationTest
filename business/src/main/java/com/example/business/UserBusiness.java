@@ -10,4 +10,6 @@ import callback.UseCaseCallBk;
 public interface UserBusiness {
 
     void getUsersAsList(UserParams param, UseCaseCallBk.UseCaseCallback<List<UserS>> callback);
+
+    void getUsersByName(UserParams userParams, UseCaseCallBk.UseCaseCallback<List<UserS>> callback);
 }

@@ -9,4 +9,6 @@ import java.util.List;
 public interface UserRepository {
 
     List<UserS> getUsers() throws ServerException, NetworkException;
+
+    List<UserS> getUsersByName(String name);
 }

@@ -36,4 +36,9 @@ public class UserRepositoryImpl implements UserRepository {
 
         return users;
     }
+
+    @Override
+    public List<UserS> getUsersByName(String name) {
+        return mUserLocalDataStore.getUsersByName(name);
+    }
 }

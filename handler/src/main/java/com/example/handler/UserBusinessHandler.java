@@ -31,4 +31,9 @@ public class UserBusinessHandler extends BusinessHandler implements UserBusiness
     public void getUsersAsList(UserParams param, UseCaseCallBk.UseCaseCallback<List<UserS>> callback) {
         execute((p, c) -> mUserBusiness.getUsersAsList(p, c), param, callback);
     }
+
+    @Override
+    public void getUsersByName(UserParams param, UseCaseCallBk.UseCaseCallback<List<UserS>> callback) {
+        execute((p, c) -> mUserBusiness.getUsersByName(p, c), param, callback);
+    }
 }

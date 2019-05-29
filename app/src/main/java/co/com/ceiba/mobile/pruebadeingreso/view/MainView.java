@@ -9,4 +9,6 @@ public interface MainView {
     void setUsers(List<UserS> response);
 
     void showErrorToast();
+
+    void showProgress(boolean status);
 }

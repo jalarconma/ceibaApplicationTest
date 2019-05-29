@@ -34,4 +34,19 @@ public class UserBusinessImpl implements UserBusiness {
             }
         }
     }
+
+    @Override
+    public void getUsersByName(UserParams userParams, UseCaseCallBk.UseCaseCallback<List<UserS>> callback) {
+        try {
+            List<UserS> users = mUserRepository.getUsersByName(userParams.getName());
+            callback.onSuccess(users);
+
+        } catch (Exception e) {
+            if (e instanceof CeibaException) {
+                callback.onError((CeibaException) e);
+            } else {
+                callback.onError(null);
+            }
+        }
+    }
 }

@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.business.models.UserS;
@@ -44,6 +41,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        viewHolder.getPostClickListener.setPosition(position);
+
         UserS user = mData.get(position);
         viewHolder.name.setText(user.getName());
         viewHolder.phone.setText(user.getPhone());
@@ -75,9 +74,32 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         @BindView(R.id.btn_view_post)
         Button btn_view_post;
 
+        GetPostClickListener getPostClickListener;
+
         public ViewHolder(View itemView, Context context) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            getPostClickListener = new GetPostClickListener();
+            btn_view_post.setOnClickListener(getPostClickListener);
+        }
+
+        private class GetPostClickListener implements View.OnClickListener {
+
+            private int mPosition;
+
+            public void setPosition (int mPosition) {
+                this.mPosition = mPosition;
+            }
+
+            @Override
+            public void onClick(View v) {
+
+                if (mPosition < getItemCount()) {
+                    UserS user = mData.get(mPosition);
+                    mListener.onGetPosts(user.getId().intValue());
+                }
+            }
         }
     }
 }
