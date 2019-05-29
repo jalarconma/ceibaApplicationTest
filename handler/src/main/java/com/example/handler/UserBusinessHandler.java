@@ -10,9 +10,11 @@ import com.example.business.parameters.UserParams;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import callback.UseCaseCallBk;
 
+@Singleton
 public class UserBusinessHandler extends BusinessHandler implements UserBusiness {
 
     private UserBusinessImpl mUserBusiness;
