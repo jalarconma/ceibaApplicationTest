@@ -22,4 +22,10 @@ public class UserDao {
         return SQLite.select().from(UserEntity.class)
                 .queryList();
     }
+
+    public UserEntity findById(Integer id) {
+        return SQLite.select().from(UserEntity.class)
+                .where(UserEntity_Table.id.eq(id.longValue()))
+                .querySingle();
+    }
 }

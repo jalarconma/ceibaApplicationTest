@@ -27,13 +27,13 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onCreate() {
         mView.showProgress(true);
-        mUserBusiness.getUsersAsList(new UserParams(null), new GetUsersResponse());
+        mUserBusiness.getUsersAsList(new UserParams(null, null), new GetUsersResponse());
     }
 
     @Override
     public void onFilterUsers(String name) {
         mView.showProgress(true);
-        mUserBusiness.getUsersByName(new UserParams(name), new FilterUsersResponse());
+        mUserBusiness.getUsersByName(new UserParams(null, name), new FilterUsersResponse());
     }
 
     private class GetUsersResponse implements UseCaseCallBk.UseCaseCallback<List<UserS>> {

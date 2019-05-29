@@ -1,5 +1,6 @@
 package repository.datasource;
 
+import com.example.business.models.Post;
 import com.example.business.models.UserS;
 import com.example.shared.exceptions.NetworkException;
 import com.example.shared.exceptions.ServerException;
@@ -49,6 +50,27 @@ public class UserCloudDataStore implements UserDataStore {
     @Override
     public List<UserS> getUsersByName(String name) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public UserS findUserById(Integer id) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Post> findUserPosts(Integer id) throws ServerException, NetworkException {
+        Call<List<Post>> callResp = mUserApiService.findUserPosts(id);
+        try {
+            Response<List<Post>> response = callResp.execute();
+            if (!response.isSuccessful()) {
+                throw new ServerException("Error en el servidor al descargar los sistemas del plan");
+            } else {
+                List<Post> dtos = response.body();
+                return dtos;
+            }
+        } catch (IOException e) {
+            throw new NetworkException("No hay conexión a Internet");
+        }
     }
 
     @Override

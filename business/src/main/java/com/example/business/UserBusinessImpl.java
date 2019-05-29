@@ -1,5 +1,6 @@
 package com.example.business;
 
+import com.example.business.models.Post;
 import com.example.business.models.UserS;
 import com.example.business.parameters.UserParams;
 import com.example.shared.exceptions.CeibaException;
@@ -40,6 +41,36 @@ public class UserBusinessImpl implements UserBusiness {
         try {
             List<UserS> users = mUserRepository.getUsersByName(userParams.getName());
             callback.onSuccess(users);
+
+        } catch (Exception e) {
+            if (e instanceof CeibaException) {
+                callback.onError((CeibaException) e);
+            } else {
+                callback.onError(null);
+            }
+        }
+    }
+
+    @Override
+    public void findUser(UserParams userParams, UseCaseCallBk.UseCaseCallback<UserS> callback) {
+        try {
+            UserS user = mUserRepository.findUserById(userParams.getId());
+            callback.onSuccess(user);
+
+        } catch (Exception e) {
+            if (e instanceof CeibaException) {
+                callback.onError((CeibaException) e);
+            } else {
+                callback.onError(null);
+            }
+        }
+    }
+
+    @Override
+    public void findUserPosts(UserParams userParams, UseCaseCallBk.UseCaseCallback<List<Post>> callback) {
+        try {
+            List<Post> posts = mUserRepository.findUserPosts(userParams.getId());
+            callback.onSuccess(posts);
 
         } catch (Exception e) {
             if (e instanceof CeibaException) {

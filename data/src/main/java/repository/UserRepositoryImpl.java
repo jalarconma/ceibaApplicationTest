@@ -1,7 +1,9 @@
 package repository;
 
 import com.example.business.UserRepository;
+import com.example.business.models.Post;
 import com.example.business.models.UserS;
+import com.example.shared.exceptions.DBNoSuchElementException;
 import com.example.shared.exceptions.NetworkException;
 import com.example.shared.exceptions.ServerException;
 
@@ -40,5 +42,15 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<UserS> getUsersByName(String name) {
         return mUserLocalDataStore.getUsersByName(name);
+    }
+
+    @Override
+    public UserS findUserById(Integer id) throws DBNoSuchElementException {
+        return mUserLocalDataStore.findUserById(id);
+    }
+
+    @Override
+    public List<Post> findUserPosts(Integer id) throws ServerException, NetworkException {
+        return mUserCloudDataStore.findUserPosts(id);
     }
 }

@@ -4,6 +4,7 @@ import com.example.business.UserBusiness;
 import com.example.business.UserBusinessImpl;
 import com.example.business.executor.PostExecutionThread;
 import com.example.business.executor.ThreadExecutor;
+import com.example.business.models.Post;
 import com.example.business.models.UserS;
 import com.example.business.parameters.UserParams;
 
@@ -35,5 +36,15 @@ public class UserBusinessHandler extends BusinessHandler implements UserBusiness
     @Override
     public void getUsersByName(UserParams param, UseCaseCallBk.UseCaseCallback<List<UserS>> callback) {
         execute((p, c) -> mUserBusiness.getUsersByName(p, c), param, callback);
+    }
+
+    @Override
+    public void findUser(UserParams param, UseCaseCallBk.UseCaseCallback<UserS> callback) {
+        execute((p, c) -> mUserBusiness.findUser(p, c), param, callback);
+    }
+
+    @Override
+    public void findUserPosts(UserParams param, UseCaseCallBk.UseCaseCallback<List<Post>> callback) {
+        execute((p, c) -> mUserBusiness.findUserPosts(p, c), param, callback);
     }
 }

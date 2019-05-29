@@ -1,6 +1,10 @@
 package repository.datasource;
 
+import com.example.business.models.Post;
 import com.example.business.models.UserS;
+import com.example.shared.exceptions.DBNoSuchElementException;
+import com.example.shared.exceptions.NetworkException;
+import com.example.shared.exceptions.ServerException;
 
 import java.util.List;
 
@@ -32,6 +36,21 @@ public class UserLocalDataStore implements UserDataStore {
     public List<UserS> getUsersByName(String name) {
         List<UserEntity> users = mUserDao.findByName(name);
         return mUserMapper.entity2Model(users);
+    }
+
+    @Override
+    public UserS findUserById(Integer id) throws DBNoSuchElementException {
+        UserEntity user = mUserDao.findById(id);
+
+        if (user == null) {
+            throw new DBNoSuchElementException();
+        }
+        return mUserMapper.entity2Model(user);
+    }
+
+    @Override
+    public List<Post> findUserPosts(Integer id) throws ServerException, NetworkException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
