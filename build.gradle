@@ -17,7 +17,7 @@ ext {
             volley          : "1.0.0",
             okhttp          : "3.8.1",
             gson            : "2.8.1",
-            dbFlow          : "4.0.4",
+            dbFlow          : "4.2.4",
             lombok          : "1.16.16",
             zxingCore       : "3.3.0",
             zxingEmbedded   : "3.5.0",

@@ -29,9 +29,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Temporary fix until alpha10
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
 }
 
 def libs = rootProject.ext.libraries;
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -68,10 +77,8 @@ dependencies {
     implementation "com.jakewharton:butterknife:$libs.butterknife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$libs.butterknife"
 
-
-    implementation project(':business')
+    implementation project(':data')
     implementation project(':shared')
     implementation project(':handler')
     implementation project(':business')
-    implementation project(':data')
 }
