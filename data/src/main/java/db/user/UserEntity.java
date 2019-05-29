@@ -20,7 +20,7 @@ public class UserEntity extends BaseModel {
     private String email;
 
     @Column
-    private String cellphone;
+    private String phone;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class UserEntity extends BaseModel {
         this.email = email;
     }
 
-    public String getCellphone() {
-        return cellphone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCellphone(String cellphone) {
-        this.cellphone = cellphone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

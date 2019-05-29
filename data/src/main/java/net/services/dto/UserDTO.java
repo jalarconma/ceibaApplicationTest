@@ -1,23 +1,15 @@
-package com.example.business.models;
+package net.services.dto;
 
-//@Data
-public class UserS {
+import lombok.Data;
 
-    private Long id;
+
+public class UserDTO {
 
     private String name;
 
     private String email;
 
     private String phone;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

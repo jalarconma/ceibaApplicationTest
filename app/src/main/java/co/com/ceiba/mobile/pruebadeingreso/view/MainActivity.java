@@ -3,6 +3,10 @@ package co.com.ceiba.mobile.pruebadeingreso.view;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.business.models.UserS;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import co.com.ceiba.mobile.pruebadeingreso.BaseActivity;
@@ -26,6 +30,8 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPresenter.onCreate();
     }
 
     @Override
@@ -37,7 +43,12 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void showToast() {
+    public void setUsers(List<UserS> response) {
+
+    }
+
+    @Override
+    public void showErrorToast() {
 
     }
 }

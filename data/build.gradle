@@ -33,13 +33,28 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //dbFlow
-//    annotationProcessor "com.github.agrosner.dbflow:processor:${libs.dbFlow}"
-//    implementation "com.github.agrosner.dbflow:core:${libs.dbFlow}"
-//    implementation "com.github.agrosner.dbflow:lib:${libs.dbFlow}"
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${libs.dbFlow}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${libs.dbFlow}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${libs.dbFlow}"
     compile "com.github.Raizlabs.DBFlow:dbflow-rx:${libs.dbFlow}"
+
+    //Http
+    compile "com.squareup.retrofit2:retrofit:${libs.retrofit}"
+    compile "com.squareup.retrofit2:converter-gson:${libs.retrofit}"
+    compile "com.squareup.okhttp3:logging-interceptor:${libs.okhttp}"
+
+    compile "com.squareup.retrofit2:adapter-rxjava:${libs.retrofit}"
+
+    //lib json
+    compile "com.google.code.gson:gson:${libs.gson}"
+
+    //lombok
+    compileOnly "org.projectlombok:lombok:${libs.lombok}"
+    annotationProcessor "org.projectlombok:lombok:${libs.lombok}"
+
+    //mapStruct
+    compile "org.mapstruct:mapstruct:${libs.mapStruct}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${libs.mapStruct}"
 
     implementation 'javax.inject:javax.inject:1@jar'
 

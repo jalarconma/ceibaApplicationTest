@@ -1,6 +1,12 @@
 package co.com.ceiba.mobile.pruebadeingreso.view;
 
+import com.example.business.models.UserS;
+
+import java.util.List;
+
 public interface MainView {
 
-    void showToast();
+    void setUsers(List<UserS> response);
+
+    void showErrorToast();
 }

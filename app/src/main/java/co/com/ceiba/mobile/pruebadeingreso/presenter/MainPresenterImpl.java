@@ -33,12 +33,12 @@ public class MainPresenterImpl implements MainPresenter {
 
         @Override
         public void onSuccess(List<UserS> response) {
-
+            mView.setUsers(response);
         }
 
         @Override
         public void onError(CeibaException error) {
-
+            mView.showErrorToast();
         }
     }
 }

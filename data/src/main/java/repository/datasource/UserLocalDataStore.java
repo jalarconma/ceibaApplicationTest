@@ -6,14 +6,36 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import db.user.UserDao;
+import db.user.UserEntity;
+import mappers.UserMapper;
+
 public class UserLocalDataStore implements UserDataStore {
 
+    private UserDao mUserDao;
+    private UserMapper mUserMapper;
+
     @Inject
-    public UserLocalDataStore() {
+    public UserLocalDataStore(UserDao mUserDao,
+                              UserMapper mUserMapper) {
+        this.mUserDao = mUserDao;
+        this.mUserMapper = mUserMapper;
     }
 
     @Override
     public List<UserS> getUsers() {
-        return null;
+        List<UserEntity> users = mUserDao.findAll();
+        return mUserMapper.entity2Model(users);
+    }
+
+    @Override
+    public List<UserS> createUsers(List<UserS> users) {
+
+        for (UserS user : users) {
+            UserEntity entity = mUserMapper.model2Entity(user);
+            entity.save();
+        }
+
+        return getUsers();
     }
 }
