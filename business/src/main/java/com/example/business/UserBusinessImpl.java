@@ -54,6 +54,7 @@ public class UserBusinessImpl implements UserBusiness {
     @Override
     public void findUser(UserParams userParams, UseCaseCallBk.UseCaseCallback<UserS> callback) {
         try {
+            String a = "";
             UserS user = mUserRepository.findUserById(userParams.getId());
             callback.onSuccess(user);
 

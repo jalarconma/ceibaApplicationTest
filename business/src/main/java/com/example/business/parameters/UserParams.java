@@ -5,6 +5,7 @@ import com.example.business.IParameter;
 public class UserParams implements IParameter {
 
     public UserParams(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 
